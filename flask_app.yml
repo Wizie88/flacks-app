@@ -1,0 +1,8 @@
+---
+- name: install flask app dependencies
+  become: yes
+  hosts: f1
+  roles:
+    - install_flask_app
+    
+...
