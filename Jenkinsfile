@@ -5,7 +5,7 @@ pipeline {
         FLASK_APP = 'app.py'
         TEST_SCRIPT = 'test.py'
         ANSIBLE_PLAYBOOK = 'deploy.yml'
-        NON_PRODUCTION_SERVER = '172.31.31.71'
+        NON_PRODUCTION_SERVER = '3.136.85.243'
     }
 
     stages {
