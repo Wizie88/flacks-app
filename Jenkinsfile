@@ -20,7 +20,6 @@ pipeline {
                 script {
                     // Set up virtual environment and install dependencies
                     sh 'python -m venv venv'
-                    sh 'source venv/bin/activate && pip install -r requirements.txt'
                 }
             }
         }
