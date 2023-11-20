@@ -1,5 +1,5 @@
 from flask import Flask
-app = Flask(__name__)
+app = flacks-app(__name__)
 @app.route('/')
 def hello():
     return 'I am almost a DevOps Engineer!\n'
