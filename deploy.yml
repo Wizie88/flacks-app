@@ -19,7 +19,7 @@
 
     - name: Copy Flask app files
       copy:
-        src: /path/to/your/app
+        src: /home/ec2-user/flacks-app/app.py   #/path/to/your/app
         dest: /path/on/remote/server
 
     - name: Start Flask app with Gunicorn
