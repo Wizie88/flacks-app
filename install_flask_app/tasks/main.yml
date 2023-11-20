@@ -1,5 +1,0 @@
----
-# tasks file for flask_app_setup
-- import_tasks: flaskInstall.yml
-- import_tasks: flaskDeploy.yml
-...

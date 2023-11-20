@@ -1,6 +1,0 @@
----
-# handlers file for flask_app_setup
-- name: Restart Flask App
-  systemd:
-    name: your_flask_app_service_name
-    state: restarted
