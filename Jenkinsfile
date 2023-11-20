@@ -11,10 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Checkout the source code from your version control system
-                    git 'your_repo_url'
-                }
+               checkout scm
             }
         }
 
