@@ -5,9 +5,9 @@ pipeline {
         FLASK_APP = 'app.py'
         TEST_SCRIPT = 'test.py'
         ANSIBLE_PLAYBOOK = 'deploy.yml'
-        NON_PRODUCTION_SERVER = '3.136.85.243'
     }
-
+    
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -15,11 +15,19 @@ pipeline {
             }
         }
 
+        stage('install Packages needed') {
+            steps{
+                sh 'virtualenv venv'
+                sh 'source venv/bin/activate && pip install flask'
+                sh 'chmod -R 755 venv'
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
                     // Set up virtual environment and install dependencies
-                    sh 'python -m venv venv'
+                    sh 'echo "building will be done and deployed momentarity"'
                 }
             }
         }
@@ -28,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    sh "python $TEST_SCRIPT"
+                    sh 'source venv/bin/activate && python $TEST_SCRIPT'
                 }
             }
         }
@@ -36,8 +44,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Run Ansible playbook for deployment
-                    sh "ansible-playbook -i $NON_PRODUCTION_SERVER $ANSIBLE_PLAYBOOK"
+                    // Running Ansible playbook for deployment
+                    ansiblePlaybook credentialsId: 'f', disableHostKeyChecking: true, installation: 'project2-1', inventory: 'hosts.ini', playbook: 'deploy.yml', vaultTmpPath: ''
                 }
             }
         }
