@@ -54,6 +54,12 @@
         executable: /opt/project2-1/venv/bin/pip
         state: present
 
+    - name: clone flask app repository
+      git: 
+        repo: https://github.com/Wizie88/flacks-app.git
+        dest: /home/ec2-user
+        version: main
+        
     - name: Copy Flask app files
       copy:
         src: /home/ec2-user/flacks-app/app.py   #/path/to/your/app
@@ -62,17 +68,20 @@
     - name: Ensure firewalld is started and enabled
       become: yes
       service:
-        name: firewalld
-        state: started
+        name: "{{ item }}
         enabled: yes
+        state: started
+      loop:
+        - httpd
+        - https
 
-    - name: allow traffic on port 5000
-      firewalld_zone:
-        zone: public
-        port: 5000/tcp
-        permanent: yes
-        state: enabled
-    #  when: firewalld.check_mode == false
+    - name: start flask web app as a service
+      systemd:
+        name: app.py
+        enabled: yes
+        state: started
+        daemon_reload: yes
+        arguments: "--host=0.0.0.0 --port=5000"
 
     - name: restart  firewalld
       service:
