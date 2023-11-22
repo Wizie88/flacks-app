@@ -54,6 +54,7 @@
         dest: /opt/project2-1/app.py
 
     - name: allow traffic on port 5000
+      become: yes
       firewalld_zone:
         zone: public
         service: http
@@ -64,7 +65,8 @@
       when: firewalld.check_mode == false
 
     - name: restart  firewalld
-      service:
+      become: yes
+      systemd:
         name: firewalld
         state: restarted
       when: firewalld.check_mode == false
