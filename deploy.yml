@@ -39,7 +39,7 @@
       command: python3 -m venv /opt/project2-1/venv
 
     - name: activate virtual environment
-      command: source /opt/project2-1/venv/bin/activate"
+      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
 
     - name: Install Flask dependencies
       pip:
