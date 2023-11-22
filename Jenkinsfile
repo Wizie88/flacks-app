@@ -7,7 +7,6 @@ pipeline {
         ANSIBLE_PLAYBOOK = 'deploy.yml'
     }
     
-    }
     stages {
         stage('Checkout') {
             steps {
