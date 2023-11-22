@@ -75,7 +75,7 @@
      #   - https
 
     - name: start flask web app as a service
-      systemd:
+      service:
         name: app.py
         enabled: yes
         state: started
