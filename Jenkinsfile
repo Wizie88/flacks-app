@@ -16,7 +16,8 @@ pipeline {
 
         stage('install Packages needed') {
             steps{
-                sh 'python3 -m venv'
+                sh 'pip install virtualenv'
+                sh 'virtualenv venv'
                 sh 'source venv/bin/activate && pip install flask'
                 sh 'chmod -R 755 venv'
             }
