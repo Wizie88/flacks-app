@@ -54,15 +54,19 @@
         dest: /opt/project2-1/app.py
 
     - name: allow traffic on port 5000
-      ufw:
-        rule: allow
-        proto: tcp
-        port: 5000
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+      notify:
+        - reload firewalld
+      when: firewalld.check_mode == false
 
-    - name: restart  ufw
-      systemd:
-        name: ufw
+    - name: restart  firewalld
+      service:
+        name: firewalld
         state: restarted
+      when: firewalld.check_mode == false
 
     - name: activate the virtual environment and Start Flask app development server
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/binflask run -- host-0.0.0.0 &"
