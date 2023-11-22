@@ -60,7 +60,7 @@
         dest: /opt/project2-1/app.py
 
     - name: allow traffic on port 5000
-      firewalld_zone:
+      firewalld:
         zone: public
         service: http
         permanent: yes
