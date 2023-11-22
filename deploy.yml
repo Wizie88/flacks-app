@@ -5,27 +5,18 @@
   remote_user: root
 
   tasks:
-    - name: update yum
-      ansible.builtin.yum:
-        name: '*'
-        state: latest
+    - name: update apt
+      apt:
+        update_cache: yes
         
     - name: Ensure Python and necessary packages are installed
-      yum:
+      apt:
         name: 
-          - python3
           - python3-pip
-          - python3-devel
-          - gcc
-          - make
-          - automake
-          - autoconf
-          - kernel-devel
-          - patch
-          - libffi-devel
-          - openssl-devel
+          - python3-dev
+          - build-essential
+          - python3-venv
           - git
-          - firewalld
         state: present
         
     - name: install ansible
@@ -33,10 +24,10 @@
         name: ansible
         state: present
 
-    - name: create python environment
-      pip: 
-        name: virtualenv
-        state: present
+   # - name: create python environment
+    #  pip: 
+     #   name: virtualenv
+      #  state: present
 
     - name: create directry for virtual environment
       command: mkdir -p /opt/project2-1 
@@ -48,6 +39,11 @@
     - name: activate virtual environment
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
 
+    - name: copy flask app file
+      copy:
+        src: app.py
+        dest: /opt/project2-1/app.py
+
     - name: Install Flask dependencies
       pip:
         name: flask # You can add Gunicorn as a production-ready WSGI server 
@@ -58,13 +54,13 @@
     #  command: git clone https://github.com/Wizie88/flacks-app.git
     #    dest: /home/ec2-user
      #   version: main
-        
-    - name: Copy Flask app files
-      copy:
-        src: /home/ec2-user/flacks-app/app.py   #/path/to/your/app
-        dest: /opt/project2-1/app.py
 
-   # - name: Ensure firewalld is started and enabled
+    - name: Ensure incoming traffic on port 5000
+       ufw:
+         rule: allow
+         proto: tcp
+         port: 5000
+         
     #  become: yes
     #  service:
      #   name: "{{ item }}"
@@ -75,16 +71,15 @@
      #   - https
 
     - name: start flask web app as a service
-      service:
-        name: app.py
-        enabled: yes
-        state: started
-        daemon_reload: yes
-        arguments: "--host=0.0.0.0 --port=5000"
+      systemd:
+        name: ufw
+        state: restarted
+       # daemon_reload: yes
+       # arguments: "--host=0.0.0.0 --port=5000"
 
-    #- name: activate the virtual environment and Start Flask app development server
-    #  command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/binflask run -- host-0.0.0.0 &"
-    #  async: 0
-    #  poll: 0
+    - name: activate the virtual environment and Start Flask app development server
+      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run -- host-0.0.0.0 &"
+      async: 0
+      poll: 0
 
 ...
