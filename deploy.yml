@@ -68,7 +68,7 @@
     - name: Ensure firewalld is started and enabled
       become: yes
       service:
-        name: "{{ item }}
+        name: "{{ item }}"
         enabled: yes
         state: started
       loop:
