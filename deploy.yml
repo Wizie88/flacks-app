@@ -33,10 +33,10 @@
         state: present
 
     - name: create virtual environment
-      command: mkdir -p /opt/project2-1 && python3 -m venv /opt/project2-1/venv
+      command: mkdir -p /opt/project2-1 && python3 -m env /opt/project2-1/env
 
     - name: activate virtual environment
-      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
+      command: /bin/bash -c "source /opt/project2-1/env/bin/activate"
 
     - name: Install Flask dependencies
       pip:
@@ -61,7 +61,7 @@
         state: restarted
 
     - name: activate the virtual environment and Start Flask app development server
-      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/binflask run -- host-0.0.0.0 &"
+      command: /bin/bash -c "source /opt/project2-1/env/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/env/binflask run -- host-0.0.0.0 &"
       async: 0
       poll: 0
 
