@@ -1,9 +1,9 @@
 ---
 - name: Deploy Flask App
   hosts: f
-  become: yes  # Run tasks with elevated privileges
+  become: yes
   remote_user: root
-
+  
   tasks:
     - name: update apt
       apt:
@@ -11,7 +11,7 @@
         
     - name: Ensure Python and necessary packages are installed
       apt:
-        name: 
+        name:
           - python3-pip
           - python3-dev
           - build-essential
@@ -23,63 +23,43 @@
       pip:
         name: ansible
         state: present
-
-   # - name: create python environment
-    #  pip: 
-     #   name: virtualenv
-      #  state: present
-
+        
     - name: create directry for virtual environment
-      command: mkdir -p /opt/project2-1 
+      command: mkdir -p /opt/project2-1
       
     - name: create virtual environment
       become: yes
       command: python3 -m venv /opt/project2-1/venv
-
+      
     - name: activate virtual environment
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
-
+      
     - name: copy flask app file
       copy:
         src: app.py
         dest: /opt/project2-1/app.py
-
+        
     - name: Install Flask dependencies
       pip:
-        name: flask # You can add Gunicorn as a production-ready WSGI server 
+        name: flask
         executable: /opt/project2-1/venv/bin/pip
         state: present
-
-    #- name: clone flask app repository
-    #  command: git clone https://github.com/Wizie88/flacks-app.git
-    #    dest: /home/ec2-user
-     #   version: main
-
-    - name: Ensure incoming traffic on port 5000
-       ufw:
-         rule: allow
-         proto: tcp
-         port: 5000
-         
-    #  become: yes
-    #  service:
-     #   name: "{{ item }}"
-    #    enabled: yes
-    #    state: started
-    #  loop:
-     #   - httpd
-     #   - https
-
+        
+    - name: Ensure incoming traffic on port
+      ufw:
+        rule: allow
+        proto: tcp
+        port: 5000
+        
     - name: start flask web app as a service
       systemd:
         name: ufw
         state: restarted
-       # daemon_reload: yes
-       # arguments: "--host=0.0.0.0 --port=5000"
-
+        
     - name: activate the virtual environment and Start Flask app development server
-      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run -- host-0.0.0.0 &"
+      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export
+        FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run --
+        host-0.0.0.0 &"
       async: 0
       poll: 0
-
 ...
