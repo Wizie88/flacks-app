@@ -32,16 +32,19 @@
         name: virtualenv
         state: present
 
+    - name: create directry for virtual environment
+      command: mkdir -p /opt/project2-1 
+      
     - name: create virtual environment
-      command: mkdir -p /opt/project2-1 && virtualenv /opt/project2-1/env
+      command: python3 -m venv /opt/project2-1/venv
 
     - name: activate virtual environment
-      command: /bin/bash -c "source /opt/project2-1/env/bin/activate"
+      command: source /opt/project2-1/venv/bin/activate"
 
     - name: Install Flask dependencies
       pip:
         name: flask # You can add Gunicorn as a production-ready WSGI server 
-        executable: /opt/project2-1/env/bin/pip
+        executable: /opt/project2-1/venv/bin/pip
         state: present
 
     - name: Copy Flask app files
