@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     // Running Ansible playbook for deployment
-                    ansiblePlaybook credentialsId: 'f', disableHostKeyChecking: true, installation: 'project2-1', inventory: 'hosts.ini', playbook: 'deploy.yml', vaultTmpPath: ''
+                    ansiblePlaybook credentialsId: 'f3', disableHostKeyChecking: true, installation: 'project2-1', inventory: 'hosts.ini', playbook: 'deploy.yml', vaultTmpPath: ''
                 }
             }
         }
