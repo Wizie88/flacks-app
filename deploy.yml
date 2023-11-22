@@ -36,6 +36,7 @@
       command: mkdir -p /opt/project2-1 
       
     - name: create virtual environment
+      become: yes
       command: python3 -m venv /opt/project2-1/venv
 
     - name: activate virtual environment
