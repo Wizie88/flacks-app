@@ -25,6 +25,7 @@
           - libffi-devel
           - openssl-devel
           - git
+          - firewalld
         state: present
         
     - name: install ansible
