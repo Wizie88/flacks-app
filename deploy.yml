@@ -26,10 +26,10 @@
           - git
         state: present
 
-      - name: create python environment
-        pip: 
-          name: virtualenv
-          state: present
+    - name: create python environment
+      pip: 
+        name: virtualenv
+        state: present
 
     - name: create virtual environment
       command: mkdir -p /opt/project2-1 && virtualenv /opt/project2-1/env
