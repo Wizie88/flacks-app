@@ -35,7 +35,7 @@
       command: mkdir -p /opt/project2-1 && virtualenv /opt/project2-1/env
 
     - name: activate virtual environment
-      command: /bin/bash -c "source /opt/project2-1/env/env/activate"
+      command: /bin/bash -c "source /opt/project2-1/env/env/bin/activate"
 
     - name: Install Flask dependencies
       pip:
