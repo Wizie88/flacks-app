@@ -26,6 +26,11 @@
           - openssl-devel
           - git
         state: present
+        
+    - name: install ansible
+      pip:
+        name: ansible
+        state: present
 
     - name: create python environment
       pip: 
