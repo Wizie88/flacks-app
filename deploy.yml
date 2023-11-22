@@ -54,11 +54,10 @@
         executable: /opt/project2-1/venv/bin/pip
         state: present
 
-    - name: clone flask app repository
-      git: 
-        repo: https://github.com/Wizie88/flacks-app.git
-        dest: /home/ec2-user
-        version: main
+    #- name: clone flask app repository
+    #  command: git clone https://github.com/Wizie88/flacks-app.git
+    #    dest: /home/ec2-user
+     #   version: main
         
     - name: Copy Flask app files
       copy:
