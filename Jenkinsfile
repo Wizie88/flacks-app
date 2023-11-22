@@ -8,9 +8,9 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
+        stage('clone repo') {
             steps {
-               checkout scm
+               git branch: 'main' , url: 'https://github.com/Wizie88/flacks-app.git'
             }
         }
 
