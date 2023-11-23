@@ -62,9 +62,7 @@
         port: 22
 
     - name: enable ufw
-      expect:
-        command: ufw enable --force
-        responses: "y"
+      command: ufw --force enable
         
     #- name: start flask web app as a service
      # systemd:
