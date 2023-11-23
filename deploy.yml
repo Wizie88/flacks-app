@@ -45,10 +45,6 @@
         executable: /opt/project2-1/venv/bin/pip
         state: present
 
-    - name: enable ufw
-      expect:
-        command: ufw enable --force
-        responses: "y"
      # when: "'inactive' in ufw_status.stdout"
      # ignore_errors: yes #ignore errors if it has already been enables
       
@@ -65,6 +61,11 @@
         name: OpenSSH
         proto: tcp
         port: 22
+
+    - name: enable ufw
+      expect:
+        command: ufw enable --force
+        responses: "y"
         
     #- name: start flask web app as a service
      # systemd:
