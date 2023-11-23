@@ -62,6 +62,12 @@
         proto: tcp
         port: 22
 
+    - name: allow port
+      command: ufw allow 22
+
+    - name: allow port
+      command: ufw allow 22 
+
     - name: enable ufw
       command: ufw --force enable
         
