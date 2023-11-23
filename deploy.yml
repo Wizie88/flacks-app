@@ -46,8 +46,9 @@
         state: present
 
     - name: enable ufw
-      command: ufw enable
-      ignore_errors: yes #ignore errors if it has already been enables
+      command: ufw enable --force
+      when: "'inactive' in ufw_status.stdout"
+     # ignore_errors: yes #ignore errors if it has already been enables
       
     - name: Ensure incoming traffic on port
       ufw:
