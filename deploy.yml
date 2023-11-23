@@ -44,7 +44,11 @@
         name: flask
         executable: /opt/project2-1/venv/bin/pip
         state: present
-        
+
+    - name: enable ufw
+      command: ufw enable
+      ignore_errors: yes #ignore errors if it has already been enables
+      
     - name: Ensure incoming traffic on port
       ufw:
         rule: allow
