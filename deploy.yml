@@ -45,8 +45,10 @@
         executable: /opt/project2-1/venv/bin/pip
         state: present
 
-  #  - name: enable ufw
-    #  command: ufw enable --force
+    - name: enable ufw
+      expect:
+        command: ufw enable --force
+        responses: "y"
      # when: "'inactive' in ufw_status.stdout"
      # ignore_errors: yes #ignore errors if it has already been enables
       
@@ -57,10 +59,14 @@
         port: 5000
         comment: "allow incoming traffic to flask app"
         
-    - name: start flask web app as a service
-      systemd:
-        name: ufw
-        state: restarted
+    #- name: start flask web app as a service
+     # systemd:
+     #   name: ufw
+      #  state: restarted
+
+    - name: reload ufw
+      ufw:
+        rule: reload
         
     - name: activate the virtual environment and Start Flask app development server
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run --host=0.0.0.0 &"
