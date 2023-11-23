@@ -75,6 +75,11 @@
     - name: change to flask app directory
       command: cd /opt/project2-1
 
+    - name: activate virtual env
+      command: source /opt/project2-1/venv/bin/activate
+      args:
+        executable: /bin/bash
+
     - name: run flask app
       command: flask run --host=0.0.0.0 --port=5000
       async: 0
