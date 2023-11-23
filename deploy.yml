@@ -58,7 +58,6 @@
     - name: Ensure incoming traffic on port
       ufw:
         rule: allow
-        name: OpenSSH
         proto: tcp
         port: 22
 
