@@ -58,6 +58,13 @@
         proto: tcp
         port: 5000
         comment: "allow incoming traffic to flask app"
+
+    - name: Ensure incoming traffic on port
+      ufw:
+        rule: allow
+        name: OpenSSH
+        proto: tcp
+        port: 22
         
     #- name: start flask web app as a service
      # systemd:
