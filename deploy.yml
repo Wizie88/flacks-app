@@ -73,7 +73,7 @@
       command: ufw reload
         
     - name: activate the virtual environment and Start Flask app development server
-      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run --host=0.0.0.0 &"
+      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate && export FLASK_APP=/opt/project2-1/app.py && opt/project2-1/venv/bin/flask run --host=0.0.0.0 --port=5000 #&"
       async: 0
       poll: 0
 ...
