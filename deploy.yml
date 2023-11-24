@@ -62,22 +62,22 @@
         proto: tcp
         port: 22
 
-    - name: allow port
-      command: ufw allow 22
+    #- name: allow port
+     # command: ufw allow 22
 
-    - name: allow port
-      command: ufw allow 5000 
+    #- name: allow port
+     # command: ufw allow 5000 
 
-    - name: enable ufw
-      command: ufw --force enable
+    #- name: enable ufw
+     # command: ufw --force enable
         
-    #- name: start flask web app as a service
-     # systemd:
-     #   name: ufw
-      #  state: restarted
+    - name: start ufw as a service
+      systemd:
+        name: ufw
+        state: restarted
 
-    - name: reload ufw
-      command: ufw reload
+    #- name: reload ufw
+     # command: ufw reload
 
   #  - name: change to flask app directory
   #    command: cd /opt/project2-1
