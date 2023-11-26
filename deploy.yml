@@ -92,6 +92,9 @@
     - name: activate virtual env
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
 
+    - name: set flask app environment variable
+      command: /bin/bash -c "export FLASK_APP=/opt/project2-1/app.py"
+
     - name: run flask app
       command: flask run --host=0.0.0.0 --port=5000
       async: 0
