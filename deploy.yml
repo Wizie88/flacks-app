@@ -20,7 +20,7 @@
           - python3-flask
           - git
         state: present
-      become:yes
+      become: yes
         
     - name: install ansible
       pip:
