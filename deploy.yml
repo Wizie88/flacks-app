@@ -86,7 +86,7 @@
      # command: ufw reload
 
     - name: change to flask app directory
-      command: python3 /opt/project2-1/app.py
+      command: python3 /opt/project2-1/app.py &
       become: yes
 
   #  - name: activate virtual env
