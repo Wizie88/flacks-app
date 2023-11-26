@@ -8,6 +8,7 @@
     - name: update apt
       apt:
         update_cache: yes
+      become: yes
         
     - name: Ensure Python and necessary packages are installed
       apt:
@@ -19,6 +20,7 @@
           - python3-flask
           - git
         state: present
+      become:yes
         
     - name: install ansible
       pip:
@@ -29,11 +31,12 @@
       command: mkdir -p /opt/project2-1
       
     - name: create virtual environment
-      become: yes
       command: python3 -m venv /opt/project2-1/venv
+      become: yes
       
     - name: activate virtual environment
       command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
+      become: yes
       
     - name: copy flask app file
       copy:
@@ -55,12 +58,14 @@
         proto: tcp
         port: 5000
         comment: "allow incoming traffic to flask app"
+      become: yes
 
     - name: Ensure incoming traffic on port
       ufw:
         rule: allow
         proto: tcp
         port: 22
+      become: yes
 
     #- name: allow port
      # command: ufw allow 22
@@ -75,6 +80,7 @@
       systemd:
         name: ufw
         state: restarted
+      become: yes
 
     #- name: reload ufw
      # command: ufw reload
