@@ -85,8 +85,9 @@
     #- name: reload ufw
      # command: ufw reload
 
-  #  - name: change to flask app directory
-  #    command: cd /opt/project2-1
+    - name: change to flask app directory
+      command: cd /opt/project2-1
+      become: yes
 
   #  - name: activate virtual env
   #    command: source /opt/project2-1/venv/bin/activate
