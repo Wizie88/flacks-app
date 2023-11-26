@@ -90,9 +90,7 @@
       #become: yes
 
     - name: activate virtual env
-      command: source /opt/project2-1/venv/bin/activate
-      args:
-        executable: /bin/bash
+      command: /bin/bash -c "source /opt/project2-1/venv/bin/activate"
 
     - name: run flask app
       command: flask run --host=0.0.0.0 --port=5000
