@@ -1,10 +1,16 @@
-from flask import Flask,render_template
-app = Flask(__name__)
+from flask import Flask, render_template, send_from_directory
+import os
+
+app = Flask(_name_)
+
 @app.route('/')
 def hello():
-    return 'I am almost a DevOps Engineer!\n'
-render_template('index.html')
-if __name__ == '__main__':
-    with app.app_context():
-        db.creat_all()
+    return render_template('index.html')
+
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    root_dir = os.path.dirname(os.getcwd())
+    return send_from_directory(os.path.join(root_dir, 'static'), filename)
+
+if _name_ == '_main_':
     app.run(debug=True)
