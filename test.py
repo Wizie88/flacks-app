@@ -25,7 +25,7 @@ class TestFlaskApp(unittest.TestCase):
         print(response.status_code)
         print(response.data)
         self.assertEqual(response.status_code, 404)
-        self.assertIn(b"Page not found", response.data)
+        self.assertIn(b'The requested URL was not found on the server.', response.data)
 
 if __name__ == '__main__':
     unittest.main()
