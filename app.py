@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
+    content = "I'm almost a DevOps engineer"
+    print(f"Returning content: {content}")
     return render_template('index.html')
 
 @app.route('/static/<path:filename>')
