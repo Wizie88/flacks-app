@@ -1,6 +1,6 @@
 import unittest
-from flask import Flask, render_template
-from app import app  # Assuming your Flask app is in a file named app.py
+from flask import Flask, render_template, send_from_directory
+from app import app
 
 class TestFlaskApp(unittest.TestCase):
 
@@ -14,6 +14,7 @@ class TestFlaskApp(unittest.TestCase):
 
     def test_hello_route(self):
         response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
         self.assertIn(b"I'm almost a DevOps engineer", response.data)
 
     def test_static_file_exists(self):
@@ -22,10 +23,9 @@ class TestFlaskApp(unittest.TestCase):
 
     def test_404_error(self):
         response = self.app.get('/nonexistent')
-        print(response.status_code)
-        print(response.data)
         self.assertEqual(response.status_code, 404)
+        self.assertIn(b'Not Found', response.data)
         self.assertIn(b'The requested URL was not found on the server.', response.data)
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     unittest.main()
