@@ -1,7 +1,7 @@
 from flask import Flask, render_template, send_from_directory
 import os
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/')
 def hello():
@@ -9,6 +9,5 @@ def hello():
     print(f"Returning content: {content}")
     return render_template('index.html')
 
-
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
