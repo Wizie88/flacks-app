@@ -9,5 +9,5 @@ def hello():
     print(f"Returning content: {content}")
     return render_template('index.html')
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
