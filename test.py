@@ -27,5 +27,5 @@ class TestFlaskApp(unittest.TestCase):
         self.assertIn(b'Not Found', response.data)
         self.assertIn(b'The requested URL was not found on the server.', response.data)
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     unittest.main()
