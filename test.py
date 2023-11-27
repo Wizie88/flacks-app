@@ -22,6 +22,8 @@ class TestFlaskApp(unittest.TestCase):
 
     def test_404_error(self):
         response = self.app.get('/nonexistent')
+        print(response.status_code)
+        print(response.data)
         self.assertEqual(response.status_code, 404)
         self.assertIn(b"Page not found", response.data)
 
