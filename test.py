@@ -14,9 +14,10 @@ class TestFlaskApp(unittest.TestCase):
 
     def test_hello_route(self):
         response = self.app.get('/')
+        print(f"Response status code: {response.status_code}")
+        print(f"Response data: {response.data}")
         self.assertEqual(response.status_code, 200)
-        expected_content = b"I'm almost a DevOps engineer"
-        self.assertIn(expected_content, response.data, f"Expected content: {expected_content}, Actual content: {response.data}")
+        self.assertIn(b"I'm almost a DevOps engineer", response.data)
 
     def test_static_file_exists(self):
         response = self.app.get('/static/images/sample.jpeg')
