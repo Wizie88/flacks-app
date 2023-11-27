@@ -6,10 +6,11 @@ class TestFlaskApp(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
-        app.app_context().push()
+        self.app_context = app.app_context()
+        self.app_context.push()
 
     def tearDown(self):
-        app.app_context().pop()
+        self.app_context.pop()
 
     def test_hello_route(self):
         response = self.app.get('/')
